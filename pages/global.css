@@ -1,0 +1,89 @@
+@import '../styles/satoshi.css';
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .border-gradient {
+    border: double 1px transparent;
+    /* border-radius: 100px; */
+    background-image: linear-gradient(var(--stage-background), var(--stage-background)), 
+                     linear-gradient(to right, var(--stage-border-start), var(--stage-border-end));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  .border-bottom-gradient {
+    border-bottom: 1px solid transparent;
+    background-image: linear-gradient(var(--stage-background), var(--stage-background)), 
+    linear-gradient(to right, rgba(var(--stage-border-start-rgb), 0.4), rgba(var(--stage-border-end-rgb), 0.4));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  font-family: 'Satoshi-Variable', sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --stage-primary: #7949f6;
+  --stage-primary-20: rgba(121, 73, 246, 0.2);
+  --stage-background: #05081B;
+  --stage-gray: #2A2D3D;
+  --stage-success: #2FCFA4;
+  --stage-error: #FC4A4A;
+  --stage-card-dark: #12152F;
+  --stage-card-light: #1E1C43;
+  --stage-border-start: #865CF7;
+  --stage-border-end: #B093FA;
+}
+
+body {
+  @apply leading-[normal] m-0 bg-stage-background min-h-screen;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
