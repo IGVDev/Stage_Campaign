@@ -23,11 +23,15 @@ const buttonStyles = {
 const Header: NextPage<HeaderProps> = ({
   className = "",
 }) => {
-  const [activeNav, setActiveNav] = useState<NavigationItem>('predictions');
+  const [activeNav, setActiveNav] = useState<NavigationItem[]>(['predictions', 'head-to-head']);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const handleNavigation = (nav: NavigationItem) => {
-    setActiveNav(nav);
+    if (activeNav.includes(nav)) {
+      setActiveNav(activeNav.filter(item => item !== nav));
+    } else {
+      setActiveNav([...activeNav, nav]);
+    }
     switch(nav) {
       case 'predictions':
         console.log('Navegando a Music Predictions');
@@ -73,17 +77,19 @@ const Header: NextPage<HeaderProps> = ({
           <div id="blury" className="absolute w-[33.3125rem] h-[3.5rem] [filter:blur(60px)] rounded-81xl bg-stage-primary opacity-20 z-0">
           </div>
           {!isSearchOpen ? (
-            <div id="header_nav" className="relative w-[30.3125rem] h-[3.5rem] border-gradient bg-stage-background rounded-full flex items-center gap-[0.312rem] p-[0.5rem] z-10" >
+            <div id="header_nav" className="relative w-[30.3125rem] h-[3.5rem] border-gradient bg-stage-background rounded-full flex items-center gap-[0.312rem] p-[0.5rem] z-10 opacity-70" >
               <Button
                 className="h-[2.5rem] flex-1"
                 startIcon={<img width="20px" height="20px" src="images/mp_icon.svg" />}
                 disableElevation
+                disabled
                 variant="contained"
-                onClick={() => handleNavigation('predictions')}
                 sx={{
                   ...buttonStyles,
-                  background: activeNav === 'predictions' ? "var(--stage-primary)" : "var(--stage-primary-20)",
-                  "&:hover": { background: "var(--stage-primary)" },
+                  background: "var(--stage-primary) !important",
+                  opacity: "1 !important",
+                  cursor: "default",
+                  color: "white !important"
                 }}
               >
                 Music Predictions
@@ -92,12 +98,14 @@ const Header: NextPage<HeaderProps> = ({
                 className="h-[2.5rem] flex-1"
                 startIcon={<img width="20px" height="20px" src="images/h2h_icon.svg" />}
                 disableElevation
+                disabled
                 variant="contained"
-                onClick={() => handleNavigation('head-to-head')}
                 sx={{
                   ...buttonStyles,
-                  background: activeNav === 'head-to-head' ? "var(--stage-primary)" : "var(--stage-primary-20)",
-                  "&:hover": { background: "var(--stage-primary)" },
+                  background: "var(--stage-primary) !important",
+                  opacity: "1 !important",
+                  cursor: "default",
+                  color: "white !important"
                 }}
               >
                 Head To Head
@@ -132,32 +140,25 @@ const Header: NextPage<HeaderProps> = ({
             </div>
           )}
         </div>
-        <div className="flex items-center gap-[1rem]">
-            <div className="flex items-center">
-              <Image
-                className="w-[1.25rem] h-[1.25rem] relative overflow-hidden shrink-0 cursor-pointer"
-                width={20}
-                height={20}
-                alt=""
-                src="images/mag_glass.svg"
-                onClick={toggleSearch}
-              />
-            </div>
-            <Button
-              id="cWallet"
-              className="h-[2.5rem] w-[14.5rem] flex-1"
-              startIcon={<img width="20px" height="20px" src="images/h2h_icon.svg" />}
-              disableElevation
-              variant="contained"
-              sx={{
-                ...buttonStyles,
-                background: "var(--stage-gray)",
-                "&:hover": { background: "var(--stage-primary)" },
-              }}
-            >
-              Connect Wallet
-            </Button>
-          </div>
+        <div className="flex items-center gap-[1rem] w-[14.5rem] justify-end">
+          <Button
+            className="h-[2.5rem]"
+            variant="contained"
+            component="a"
+            href="https://www.stage.community/"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              ...buttonStyles,
+              background: "var(--stage-primary)",
+              "&:hover": { background: "var(--stage-primary)" },
+              px: 4,
+              textDecoration: 'none'
+            }}
+          >
+            Stake Now
+          </Button>
+        </div>
       </div>
     </header>
   );
