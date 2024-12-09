@@ -9,9 +9,9 @@ const Navigation: NextPage<NavigationProps> = ({
   className = "",
 }) => {
   return (
-    <div className="w-[13.313rem] relative">
+    <nav className="w-[13.313rem] flex flex-col relative bg-stage-background">
       <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-[rgba(121,73,246,0.2)] via-[rgba(121,73,246,0.5)] to-[rgba(121,73,246,0.2)]" />
-      <div className="w-full flex flex-col items-start justify-start pt-[2.5rem] pl-[2.5rem]">
+      <div className="flex-1 flex flex-col pt-[2.5rem] pl-[2.5rem]">
         <div className="flex flex-col items-start justify-start gap-[3rem]">
           <div className="flex flex-row items-start justify-start gap-[0.687rem]">
             <Image
@@ -76,7 +76,7 @@ const Navigation: NextPage<NavigationProps> = ({
           </div>
         </div>      
       </div>
-    </div>
+    </nav>
   );
 };
 
