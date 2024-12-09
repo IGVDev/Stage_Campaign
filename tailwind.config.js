@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ['Satoshi-Variable', 'sans-serif'],
       },
+      letterSpacing: {
+        '3percent': '0.03em', // Agrega un valor personalizado del 3%
+      },
       colors: {
         stage: {
           primary: "#7949f6",

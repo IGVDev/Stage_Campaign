@@ -8,7 +8,8 @@ const CountdownTimer: React.FC = () => {
   const [isExpired, setIsExpired] = useState(false);
 
   useEffect(() => {
-    const targetDate = new Date('2024-12-18T17:00:00Z'); // 18 December 5pm UTC
+    // Establecer la fecha objetivo 18 de Diciembre a las 5pm UTC
+    const targetDate = new Date('2024-12-18T17:00:00Z');
 
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -38,11 +39,11 @@ const CountdownTimer: React.FC = () => {
   if (isExpired) {
     return (
       <button 
-        className="p-[1px] rounded-xl bg-gradient-to-r from-[#865CF7] to-[#5435AA] hover:opacity-90 transition-opacity"
+        className="p-[1px] rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer"
         onClick={() => console.log('Claim now!')}
       >
-        <div className="px-6 py-3 rounded-xl bg-[#12152F]">
-          <span className="text-white">Claim Now</span>
+        <div className="px-6 py-2 rounded-full bg-gradient-to-r from-[#865CF7] to-[#B093FA] hover:bg-[#12152F]">
+          <span className="text-white">Spin to Claim Prize</span>
         </div>
       </button>
     );
@@ -70,7 +71,34 @@ const SpHome: NextPage = () => {
               opacity: '0.1'
             }}
           />
-          <div className="relative z-10 container mx-auto px-4">
+          <div className="relative z-10 flex justify-between items-center h-full">
+            <div className="flex flex-col">
+              <div className="inline-block bg-[#D0BEFF] bg-opacity-20 rounded-full px-6 py-2 mb-[1.5rem] text-white font-medium text-[1rem] tracking-3percent">
+                10 December 2024, 10AM UTC — 18 December 2024, 10AM UTC
+              </div>
+              <h1 className="text-[2rem] font-bold text-white mb-[20px] leading-[0.8]">
+                Spin And Win $COOKIE And More!
+              </h1>
+              <p className="text-white max-w-[605px] mb-[2rem] leading-[1.3]">
+              Complete Tasks & Spin to win $COOKIE other prizes include: tesla model S white, iPhone 15, Rolex, playstation, USDT and more!
+              </p>
+              <button 
+                className="p-[1px] rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit"
+                onClick={() => console.log('Stake now')}
+              >
+                <div className="px-6 py-2 rounded-full text-[#7949F6] font-medium bg-white hover:bg-[#865CF7] hover:text-white">
+                  <span>Stake Now</span>
+                </div>
+              </button>
+            </div>
+            <div className="relative w-[400px] h-[200px]">
+              <Image 
+                src="/images/prices.png" 
+                alt="Prizes" 
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
           </div>
         </div>
       </article>
