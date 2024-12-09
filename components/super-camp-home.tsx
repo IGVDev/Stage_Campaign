@@ -93,7 +93,7 @@ const SpHome: NextPage = () => {
             </div>
             <div className="relative w-[400px] h-[200px]">
               <Image 
-                src="/images/prices.png" 
+                src="/Stage_Campaign/images/prices.png" 
                 alt="Prizes" 
                 layout="fill"
                 objectFit="contain"
