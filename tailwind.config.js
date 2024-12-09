@@ -1,3 +1,5 @@
+const { lightGreen } = require('@mui/material/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -16,11 +18,13 @@ module.exports = {
           "primary-20": "rgba(121, 73, 246, 0.2)", // primary at 20% opacity
           background: "#05081B",  //bg para el body
           gray: "#2A2D3D",        // boton wallet connect
+          lightGray: "#B7BACC",
           success: "#2FCFA4",     // Verde para "Yes"
           error: "#FC4A4A",       // Rojo para "No"
           card: {
             dark: "#12152F",
-            light: "#1E1C43"
+            light: "#1E1C43",
+            detail: "#2C2C5B"
           },
           border: {
             start: "#865CF7",    // Color inicio del gradiente

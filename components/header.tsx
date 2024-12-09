@@ -46,9 +46,9 @@ const Header: NextPage<HeaderProps> = ({
     <header
         className={`self-stretch border-bottom-gradient box-border overflow-hidden h-[6.25rem] px-[2.5rem] top-[0] z-[99] sticky flex items-center ${className}`}
       >
-      <div className="w-[85rem] mx-auto flex flex-row items-start justify-between gap-[1.25rem]">
-        <div id="brand" className="w-[16.813rem] flex flex-col items-start justify-start pt-[0.343rem] px-[0rem] pb-[0rem] box-border">
-          <div className="flex flex-row items-end justify-start gap-[0.431rem]">
+      <div className="w-[85rem] mx-auto flex flex-row items-center justify-between gap-[1.25rem]">
+        <div id="brand" className="flex items-center">
+          <div className="flex flex-row items-center gap-[0.431rem]">
             <Image
               className="h-[2.663rem] w-[2.663rem] relative"
               loading="lazy"
@@ -57,9 +57,9 @@ const Header: NextPage<HeaderProps> = ({
               alt=""
               src="images/group-849.svg"
             />
-            <div className="flex-1 flex flex-col items-start justify-end pt-[0rem] px-[0rem] pb-[0.193rem]">
+            <div className="flex items-center">
               <Image
-                className="self-stretch h-[2.038rem] relative max-w-full overflow-hidden shrink-0"
+                className="h-[2.038rem] relative"
                 loading="lazy"
                 width={96}
                 height={33}
@@ -132,9 +132,8 @@ const Header: NextPage<HeaderProps> = ({
             </div>
           )}
         </div>
-        <div className="h-[3rem] w-[16.75rem] flex flex-col items-start justify-start pt-[0.5rem] px-[0rem] pb-[0rem] box-border">
-          <div className="self-stretch flex-1 flex flex-row items-start justify-start gap-[1rem]">
-            <div className="flex flex-col items-start justify-start pt-[0.625rem] px-[0rem] pb-[0rem]">
+        <div className="flex items-center gap-[1rem]">
+            <div className="flex items-center">
               <Image
                 className="w-[1.25rem] h-[1.25rem] relative overflow-hidden shrink-0 cursor-pointer"
                 width={20}
@@ -145,7 +144,8 @@ const Header: NextPage<HeaderProps> = ({
               />
             </div>
             <Button
-              className="h-[2.5rem] flex-1"
+              id="cWallet"
+              className="h-[2.5rem] w-[14.5rem] flex-1"
               startIcon={<img width="20px" height="20px" src="images/h2h_icon.svg" />}
               disableElevation
               variant="contained"
@@ -158,7 +158,6 @@ const Header: NextPage<HeaderProps> = ({
               Connect Wallet
             </Button>
           </div>
-        </div>
       </div>
     </header>
   );

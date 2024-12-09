@@ -3,11 +3,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@mui/material";
 import Header from "../components/header";
-// import Navigation from "../components/navigation";
+import Navigation from "../components/navigation";
+import TopPredictions from "../components/top-predictions";
+import BalanceCard from "../components/balance-card";
 // import TrendingQuestions from "../components/trending-questions";
-// import TopPredictions from "../components/top-predictions";
 // import PredictionList from "../components/prediction-list";
-// import BalanceCard from "../components/balance-card";
 // import RecentActivities from "../components/recent-activities";
 // import TopValueWeek from "../components/top-value-week";
 // import CompareSection from "../components/compare-section";
@@ -71,27 +71,22 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="relative bg-whitesmoke w-full h-[1080px] overflow-hidden text-left text-base text-gray-200 font-inter">
+    <div className="relative bg-whitesmoke w-full h-[1080px] overflow-hidden">
       <Header />
-      {/* <Navigation /> */}
-      <main className="absolute top-[104px] left-[80px] w-[1840px] flex flex-col items-start justify-start gap-[32px] text-17xl">
-        <div className="self-stretch flex flex-row items-start justify-start gap-[32px]">
-          <div className="flex-1 flex flex-col items-start justify-start gap-[32px]">
+      <main className="flex flex-row items-start justify-start gap-[1.5rem] max-w-[90rem] mx-auto text-white">
+        <Navigation />
+        <div className="self-stretch flex flex-row items-start justify-start gap-[1.5rem] pt-[1.5rem]">
+          <section className="flex-1 flex flex-col items-start justify-start gap-[1.5rem] max-w-[48.75rem]">
+            <TopPredictions />
             {/* <TrendingQuestions /> */}
-            {/* <TopPredictions predictions={mockPredictions} onCompareClick={handleCompareClick} /> */}
-            {/* <PredictionList /> */}
-          </div>
-          <div className="w-[384px] flex flex-col items-start justify-start gap-[32px] text-base">
-            {/* <BalanceCard /> */}
+            {/* <CompareSection /> */}
+          </section>
+          <aside className="w-[22.4375rem] h-full bg-stage-card-light flex flex-col items-start justify-start gap-[1.5rem]">
+            <BalanceCard />
             {/* <RecentActivities /> */}
             {/* <TopValueWeek /> */}
-          </div>
+          </aside>
         </div>
-        {/* <CompareSection
-          activeCompareButtons={activeCompareButtons}
-          onCompareClick={handleCompareClick}
-          predictions={mockPredictions}
-        /> */}
       </main>
     </div>
   );
