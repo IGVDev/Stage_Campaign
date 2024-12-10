@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useCallback, useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -86,38 +86,42 @@ const Header: NextPage<HeaderProps> = ({
         <div id="main_nav_container" className="relative flex-col items-center justify-center hidden lg:flex">
           <div id="blury" className="absolute w-[33.3125rem] h-[3.5rem] [filter:blur(60px)] rounded-81xl bg-stage-primary opacity-20 z-0" />
           <div id="header_nav" className="relative w-[30.3125rem] h-[3.5rem] border-gradient bg-stage-background rounded-full flex items-center gap-[0.312rem] p-[0.5rem] z-10 opacity-70" >
-            <Button
-              className="h-[2.5rem] flex-1"
-              startIcon={<img width="20px" height="20px" src="/images/mp_icon.svg" />}
-              disableElevation
-              disabled
-              variant="contained"
-              sx={{
-                ...buttonStyles,
-                background: "var(--stage-primary) !important",
-                opacity: "1 !important",
-                cursor: "default",
-                color: "white !important"
-              }}
-            >
-              Music Predictions
-            </Button>
-            <Button
-              className="h-[2.5rem] flex-1"
-              startIcon={<img width="20px" height="20px" src="/images/h2h_icon.svg" />}
-              disableElevation
-              disabled
-              variant="contained"
-              sx={{
-                ...buttonStyles,
-                background: "var(--stage-primary) !important",
-                opacity: "1 !important",
-                cursor: "default",
-                color: "white !important"
-              }}
-            >
-              Head To Head
-            </Button>
+            <Tooltip title="Coming soon" arrow placement="bottom">
+              <Button
+                className="h-[2.5rem] flex-1"
+                startIcon={<img width="20px" height="20px" src="/images/mp_icon.svg" />}
+                disableElevation
+                disabled
+                variant="contained"
+                sx={{
+                  ...buttonStyles,
+                  background: "var(--stage-primary) !important",
+                  opacity: "1 !important",
+                  cursor: "default",
+                  color: "white !important"
+                }}
+              >
+                Music Predictions
+              </Button>
+            </Tooltip>
+            <Tooltip title="Coming soon" arrow placement="bottom">
+              <Button
+                className="h-[2.5rem] flex-1"
+                startIcon={<img width="20px" height="20px" src="/images/h2h_icon.svg" />}
+                disableElevation
+                disabled
+                variant="contained"
+                sx={{
+                  ...buttonStyles,
+                  background: "var(--stage-primary) !important",
+                  opacity: "1 !important",
+                  cursor: "default",
+                  color: "white !important"
+                }}
+              >
+                Head To Head
+              </Button>
+            </Tooltip>
           </div>          
         </div>
         <div id="spacer" className="h-[2.625rem] w-[2.625rem] ipad:w-[9.0625rem] relative hidden ipad:block" />
