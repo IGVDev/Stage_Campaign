@@ -22,6 +22,14 @@ export default function MyApp(props: AppProps) {
       <Head>
         <title>Stage</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        
+        {/* Favicons */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#865CF7" />
+        <meta name="theme-color" content="#865CF7" />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />

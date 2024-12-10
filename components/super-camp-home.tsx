@@ -121,7 +121,7 @@ const SuperCampHome: React.FC = () => {
   return (
     <section className="flex-1 flex flex-col gap-6">
       <article>
-        <div id="topCard" className="self-stretch rounded-3xl relative w-full h-[18.0625rem] p-[2rem]" style={{ backgroundColor: '#865CF7' }}>
+        <div id="topCard" className="self-stretch rounded-3xl relative w-full min-h-[18.0625rem] p-4 md:p-8 lg:p-[2rem]" style={{ backgroundColor: '#865CF7' }}>
           {/* Background image with 10% opacity */}
           <div 
             className="absolute inset-0 bg-cover bg-center z-0 rounded-3xl"
@@ -130,33 +130,9 @@ const SuperCampHome: React.FC = () => {
               opacity: '0.1'
             }}
           />
-          <div className="relative z-10 flex justify-between items-center h-full">
+          <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start lg:justify-between h-full gap-6">
             <motion.div 
-              className="flex flex-col"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              <div className="inline-block bg-[#D0BEFF] bg-opacity-20 rounded-full px-6 py-2 mb-[1.5rem] text-white font-medium text-[1rem] tracking-3percent">
-                11 December 2024, 2PM UTC — 18 December 2024, 2PM UTC
-              </div>
-              <h1 className="text-[2rem] font-bold text-white mb-[20px] leading-[0.8]">
-                Spin And Win $STAGE And More!
-              </h1>
-              <p className="text-white max-w-[605px] mb-[2rem] leading-[1.3]">
-              Spin to win $STAGE other prizes include: Tesla Model S white, iPhone 15, Rolex, Playstation, USDT and more!
-              </p>
-              <button 
-                className="p-[1px] rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit"
-                onClick={() => window.open('https://www.stage.community/', '_blank', 'noopener,noreferrer')}
-              >
-                <div className="px-6 py-2 rounded-full text-[#7949F6] font-medium bg-white hover:bg-[#865CF7] hover:text-white">
-                  <span>Stake Now</span>
-                </div>
-              </button>
-            </motion.div>
-            <motion.div 
-              className="relative w-[400px] h-[200px]"
+              className="relative w-full md:w-[300px] lg:w-[400px] h-[150px] md:h-[200px] lg:order-2"
               initial={{ opacity: 0, x: 500 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
@@ -167,6 +143,30 @@ const SuperCampHome: React.FC = () => {
                 fill
                 className="object-contain"
               />
+            </motion.div>
+            <motion.div 
+              className="flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:max-w-[605px]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <div className="w-fit bg-[#D0BEFF] bg-opacity-20 rounded-full px-4 md:px-6 py-2 mb-4 md:mb-[1.5rem] text-white font-medium text-sm md:text-[1rem] tracking-3percent whitespace-nowrap">
+                11 December 2024, 2PM UTC - 18 December 2024, 2PM UTC
+              </div>
+              <h1 className="text-3xl md:text-3xl lg:text-[2rem] font-bold text-white mb-3 md:mb-[20px] leading-tight">
+                Spin And Win $STAGE And More!
+              </h1>
+              <p className="text-white font-medium text-sm md:text-[1rem] sm:w-9/12 lg:w-full sm:text-[1.1rem] mb-4 md:mb-[2rem] leading-[1.4]">
+                Spin to win $STAGE & other prizes such as: Tesla Model S white, iPhone 16 Pro, Rolex, Playstation 5 And USDT.
+              </p>
+              <button 
+                className="p-[1px] rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit mb-4 md:mb-6"
+                onClick={() => window.open('https://staking.stage.community/', '_blank', 'noopener,noreferrer')}
+              >
+                <div className="px-8 md:px-10 py-3 md:py-4 rounded-full text-[#7949F6] font-medium bg-white hover:bg-[#865CF7] hover:text-white text-base md:text-lg">
+                  <span>Stake Now</span>
+                </div>
+              </button>
             </motion.div>
           </div>
         </div>
@@ -255,16 +255,16 @@ const SuperCampHome: React.FC = () => {
         <h2 className="h2-title">
           Spin and win $STAGE and More!
         </h2>
-        <div id="lastCard" className="self-stretch rounded-3xl relative w-full bg-stage-card-dark p-8">
-          <div className="grid grid-cols-5 gap-4 justify-between w-full">
+        <div id="lastCard" className="self-stretch rounded-3xl relative w-full bg-stage-card-dark p-4 sm:p-6 md:p-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 justify-between w-full">
             {prizes.map((prize, index) => (
               <div key={index} className="flex justify-center w-full">
-                <div className="w-[192px] h-[148px] bg-[#212043] rounded-xl p-4 flex flex-col items-center shadow-[1px_1px_0px_0px_rgba(255,255,255,0.1)]">
-                  <div className="relative w-24 h-24 mb-2">
+                <div className="w-full max-w-[192px] h-auto min-h-[148px] bg-[#212043] rounded-xl p-3 sm:p-4 flex flex-col items-center shadow-[1px_1px_0px_0px_rgba(255,255,255,0.1)]">
+                  <div className="relative w-16 sm:w-20 md:w-24 aspect-square mb-2">
                     <Image src={prize.image} alt={prize.name} fill className="object-contain" />
                   </div>
-                  <p className="text-white text-center font-medium text-[1rem] leading-3">{prize.name}</p>
-                  {prize.suffix && <p className="text-white text-center">{prize.suffix}</p>}
+                  <p className="text-white text-center font-medium text-sm sm:text-base md:text-[1rem] leading-tight">{prize.name}</p>
+                  <p className="text-stage-lightGray text-center text-xs sm:text-sm">{prize.suffix}</p>
                 </div>
               </div>
             ))}
