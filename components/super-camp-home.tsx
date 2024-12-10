@@ -222,7 +222,7 @@ const SuperCampHome: React.FC = () => {
                   <Image src="/images/bg-bullet-active.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">01</span>
                 </div>
-                <span className="text-white text-xl">Stake $STAGE Tokens on www.staking.stage.community</span>
+                <span className="text-white text-xl">Stake $STAGE Tokens on staking.stage.community</span>
                 {/* Línea vertical al siguiente bullet */}
                 <div className="absolute left-5 top-10 w-[2px] h-[2.5rem] bg-gradient-to-b from-[#865CF7] to-[#5435AA]"></div>
               </div>
