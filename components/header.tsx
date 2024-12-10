@@ -53,7 +53,7 @@ const Header: NextPage<HeaderProps> = ({ className = "" }) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`self-stretch border-bottom-gradient box-border overflow-hidden h-[6.25rem] px-[2.5rem] top-[0] z-[99] sticky flex items-center ${className}`}
+      className={`self-stretch border-bottom-gradient box-border overflow-hidden h-[6.25rem] px-[2.5rem] top-[0] z-[99] sticky flex items-center pl-[0.625rem] md:pl-[2.5rem] ${className}`}
     >
       <div className="w-[85rem] mx-auto flex flex-row items-center justify-between gap-[1.25rem]">
         <div id="brand">
