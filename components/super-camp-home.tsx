@@ -87,7 +87,7 @@ const prizes = [
     image: "/images/grid/03.png"
   },
   {
-    name: "iPhone 15",
+    name: "iPhone 16 Pro",
     suffix: "(1x)",
     image: "/images/grid/04.png"
   },
