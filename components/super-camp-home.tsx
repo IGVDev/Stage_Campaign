@@ -138,13 +138,13 @@ const SuperCampHome: React.FC = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <div className="inline-block bg-[#D0BEFF] bg-opacity-20 rounded-full px-6 py-2 mb-[1.5rem] text-white font-medium text-[1rem] tracking-3percent">
-                10 December 2024, 10AM UTC — 18 December 2024, 10AM UTC
+                11 December 2024, 2PM UTC — 18 December 2024, 2PM UTC
               </div>
               <h1 className="text-[2rem] font-bold text-white mb-[20px] leading-[0.8]">
-                Spin And Win $COOKIE And More!
+                Spin And Win $STAGE And More!
               </h1>
               <p className="text-white max-w-[605px] mb-[2rem] leading-[1.3]">
-              Complete Tasks & Spin to win $COOKIE other prizes include: tesla model S white, iPhone 15, Rolex, playstation, USDT and more!
+              Spin to win $STAGE other prizes include: Tesla Model S white, iPhone 15, Rolex, Playstation, USDT and more!
               </p>
               <button 
                 className="p-[1px] rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit"
@@ -222,7 +222,7 @@ const SuperCampHome: React.FC = () => {
                   <Image src="/images/bg-bullet-active.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">01</span>
                 </div>
-                <span className="text-white text-xl">Stake stage Tokens on www.demo.com</span>
+                <span className="text-white text-xl">Stake $STAGE Tokens on www.staking.stage.community</span>
                 {/* Línea vertical al siguiente bullet */}
                 <div className="absolute left-5 top-10 w-[2px] h-[2.5rem] bg-gradient-to-b from-[#865CF7] to-[#5435AA]"></div>
               </div>
@@ -232,7 +232,7 @@ const SuperCampHome: React.FC = () => {
                   <Image src="/images/bg-bullet.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">02</span>
                 </div>
-                <span className="text-stage-lightGray text-xl">Snapshop on the 17th of December at demo</span>
+                <span className="text-stage-lightGray text-xl">Snapshot on the 18th of December at 4PM UTC</span>
                 {/* Línea vertical al siguiente bullet */}
                 <div className="absolute left-5 top-10 w-[2px] h-[2.5rem] bg-gradient-to-b from-[#865CF7] to-[#5435AA]"></div>
               </div>
@@ -243,7 +243,7 @@ const SuperCampHome: React.FC = () => {
                   <span className="relative z-10 text-white">03</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="text-stage-lightGray text-xl">Claim Your Price In:</span>
+                  <span className="text-stage-lightGray text-xl">Claim Your Prize In:</span>
                   <CountdownTimer />
                 </div>
               </div>
@@ -253,7 +253,7 @@ const SuperCampHome: React.FC = () => {
       </article>
       <article>
         <h2 className="h2-title">
-          Spin and win $COOKIE and More!
+          Spin and win $STAGE and More!
         </h2>
         <div id="lastCard" className="self-stretch rounded-3xl relative w-full bg-stage-card-dark p-8">
           <div className="grid grid-cols-5 gap-4 justify-between w-full">
