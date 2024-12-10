@@ -83,7 +83,7 @@ const Header: NextPage<HeaderProps> = ({
             />
           </div>                   
         </div>   
-        <div id="main_nav_container" className="relative flex flex-col items-center justify-center hidden ipad:flex">
+        <div id="main_nav_container" className="relative flex-col items-center justify-center hidden lg:flex">
           <div id="blury" className="absolute w-[33.3125rem] h-[3.5rem] [filter:blur(60px)] rounded-81xl bg-stage-primary opacity-20 z-0" />
           <div id="header_nav" className="relative w-[30.3125rem] h-[3.5rem] border-gradient bg-stage-background rounded-full flex items-center gap-[0.312rem] p-[0.5rem] z-10 opacity-70" >
             <Button
