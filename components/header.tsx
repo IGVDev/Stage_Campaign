@@ -86,7 +86,7 @@ const Header: NextPage<HeaderProps> = ({ className = "" }) => {
         </div>
         <div
           id="main_nav_container"
-          className="relative flex-col items-center justify-center hidden lg:flex"
+          className="relative hidden lg:flex flex-col items-center justify-center"
         >
           <div
             id="blury"
