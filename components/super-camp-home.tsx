@@ -134,14 +134,14 @@ const SuperCampHome: React.FC = () => {
             <motion.div 
               className="relative w-full md:w-[300px] lg:w-[408px] h-[150px] md:h-[200px] lg:h-[249px] lg:order-2"
               initial={{ x: 100, opacity: 0 }}
-              animate={{ x: -32, opacity: 1 }}
+              animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <Image
                 src="/images/prizes.png" 
                 alt="Prizes" 
                 fill
-                className="object-contain mr-[64px]"
+                className="object-contain"
                 priority
               />
             </motion.div>
