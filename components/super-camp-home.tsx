@@ -74,46 +74,46 @@ const prizes = [
   {
     name: "Tesla Model S",
     suffix: "White(1x)",
-    image: "/Stage_Campaign/images/grid/01.png"
+    image: "/images/grid/01.png"
   },
   {
     name: "Rolex",
     suffix: "(1x)",
-    image: "/Stage_Campaign/images/grid/02.png"
+    image: "/images/grid/02.png"
   },
   {
     name: "Play Station",
     suffix: "(1x)",
-    image: "/Stage_Campaign/images/grid/03.png"
+    image: "/images/grid/03.png"
   },
   {
     name: "iPhone 15",
     suffix: "(1x)",
-    image: "/Stage_Campaign/images/grid/04.png"
+    image: "/images/grid/04.png"
   },
   {
     name: "1,00,000 $Stage",
-    image: "/Stage_Campaign/images/grid/05.png"
+    image: "/images/grid/05.png"
   },
   {
     name: "100 $Stage",
-    image: "/Stage_Campaign/images/grid/05.png"
+    image: "/images/grid/05.png"
   },
   {
     name: "25 $Stage",
-    image: "/Stage_Campaign/images/grid/05.png"
+    image: "/images/grid/05.png"
   },
   {
     name: "10 $Stage",
-    image: "/Stage_Campaign/images/grid/05.png"
+    image: "/images/grid/05.png"
   },
   {
     name: "10 USDT",
-    image: "/Stage_Campaign/images/grid/09.png"
+    image: "/images/grid/09.png"
   },
   {
     name: "5 USDT",
-    image: "/Stage_Campaign/images/grid/09.png"
+    image: "/images/grid/09.png"
   }
 ];
 
@@ -126,7 +126,7 @@ const SuperCampHome: React.FC = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center z-0 rounded-3xl"
             style={{
-              backgroundImage: 'url(/Stage_Campaign/images/bg-01.png)',
+              backgroundImage: 'url(/images/bg-01.png)',
               opacity: '0.1'
             }}
           />
@@ -162,7 +162,7 @@ const SuperCampHome: React.FC = () => {
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             >
               <Image
-                src="/Stage_Campaign/images/prizes.png" 
+                src="/images/prizes.png" 
                 alt="Prizes" 
                 fill
                 className="object-contain"
@@ -196,7 +196,7 @@ const SuperCampHome: React.FC = () => {
                 }
               }}
               style={{
-                backgroundImage: 'url(/Stage_Campaign/images/looper_bg.svg)',
+                backgroundImage: 'url(/images/looper_bg.svg)',
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'
@@ -219,7 +219,7 @@ const SuperCampHome: React.FC = () => {
             <div className="flex flex-col gap-8">
               <div className="flex items-center gap-6 relative">
                 <div className="relative w-10 h-10 flex items-center justify-center">
-                  <Image src="/Stage_Campaign/images/bg-bullet-active.svg" alt="bullet" fill />
+                  <Image src="/images/bg-bullet-active.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">01</span>
                 </div>
                 <span className="text-white text-xl">Stake stage Tokens on www.demo.com</span>
@@ -229,7 +229,7 @@ const SuperCampHome: React.FC = () => {
               
               <div className="flex items-center gap-6 relative">
                 <div className="relative w-10 h-10 flex items-center justify-center">
-                  <Image src="/Stage_Campaign/images/bg-bullet.svg" alt="bullet" fill />
+                  <Image src="/images/bg-bullet.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">02</span>
                 </div>
                 <span className="text-stage-lightGray text-xl">Snapshop on the 17th of December at demo</span>
@@ -239,7 +239,7 @@ const SuperCampHome: React.FC = () => {
               
               <div className="flex items-center gap-6">
                 <div className="relative w-10 h-10 flex items-center justify-center">
-                  <Image src="/Stage_Campaign/images/bg-bullet.svg" alt="bullet" fill />
+                  <Image src="/images/bg-bullet.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">03</span>
                 </div>
                 <div className="flex items-center gap-4">
