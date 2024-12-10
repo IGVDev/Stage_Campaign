@@ -57,23 +57,7 @@ const Header: NextPage<HeaderProps> = ({ className = "" }) => {
     >
       <div className="w-[85rem] mx-auto flex flex-row items-center justify-between gap-[1.25rem]">
         <div id="brand">
-          <motion.div
-            id="stage-icon"
-            className="block ipad:hidden"
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-          >
-            <Image
-              className="h-[2.625rem] w-[2.625rem] relative"
-              loading="lazy"
-              width={42}
-              height={42}
-              alt="Stage Community"
-              src="/images/stage-icon.svg"
-            />
-          </motion.div>
-          <div id="stage_logo" className="hidden ipad:block">
+          <div id="stage_logo">
             <Image
               className="h-[2.625rem] w-[9.0625rem] relative"
               loading="lazy"
@@ -86,7 +70,7 @@ const Header: NextPage<HeaderProps> = ({ className = "" }) => {
         </div>
         <div
           id="main_nav_container"
-          className="relative hidden md:flex flex-col items-center justify-center"
+          className="relative hidden ipad:flex flex-col items-center justify-center"
         >
           <div
             id="blury"

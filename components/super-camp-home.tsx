@@ -153,7 +153,7 @@ const SuperCampHome: React.FC = () => {
           />
           <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-center lg:justify-between h-full gap-6">
             <motion.div
-              className="relative w-full md:w-[300px] lg:w-[408px] h-[150px] md:h-[200px] lg:h-[249px] lg:order-2"
+              className="relative w-full max-w-[408px] aspect-[408/249] lg:order-2"
               initial={{ x: 100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -167,12 +167,12 @@ const SuperCampHome: React.FC = () => {
               />
             </motion.div>
             <motion.div
-              className="flex flex-col justify-between items-center lg:items-start text-center lg:text-left w-full lg:max-w-[605px] h-full"
+              className="flex flex-col justify-between items-center lg:items-start text-center lg:text-left w-full h-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <div className="w-fit bg-[#D0BEFF] bg-opacity-20 rounded-full px-4 md:px-6 py-2 mb-4 md:mb-[1.5rem] text-white font-medium text-sm md:text-[1rem] tracking-3percent whitespace-nowrap">
+              <div className="w-fit bg-[#D0BEFF] bg-opacity-20 rounded-full px-4 md:px-6 py-2 mb-4 md:mb-[1.5rem] text-white font-medium text-sm md:text-[1rem] tracking-3percent">
                 11 December 2024, 2PM UTC - 18 December 2024, 2PM UTC
               </div>
               <h1 className="text-3xl md:text-3xl lg:text-[2rem] font-bold text-white mb-3 md:mb-[20px] leading-tight">
@@ -247,50 +247,54 @@ const SuperCampHome: React.FC = () => {
             />
           </div>
 
-          <div className="relative z-10 container mx-auto">
-            <div className="flex flex-col gap-8">
-              <div className="flex items-center gap-6 relative">
-                <div className="relative w-10 h-10 flex items-center justify-center">
+          <div className="relative z-10 container mx-auto px-4">
+            <div className="flex flex-col gap-8 max-w-[100%]">
+              <div className="flex flex-row items-start gap-6 relative min-w-0">
+                <div className="relative w-10 h-10 flex items-center justify-center shrink-0">
                   <Image src="/images/bg-bullet-active.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">01</span>
                 </div>
-                <span className="text-white text-xl">
-                  Stake $STAGE Tokens on{" "}
-                  <a
-                    href="https://staking.stage.community"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#D0BEFF] hover:opacity-80 transition-opacity"
-                  >
-                    staking.stage.community
-                  </a>
-                </span>
-                {/* Línea vertical al siguiente bullet */}
+                <div className="min-w-0 flex-1">
+                  <span className="text-white text-base sm:text-xl break-words">
+                    Stake $STAGE Tokens on{" "}
+                    <a
+                      href="https://staking.stage.community"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#D0BEFF] hover:opacity-80 transition-opacity break-all"
+                    >
+                      staking.stage.community
+                    </a>
+                  </span>
+                </div>
                 <div className="absolute left-5 top-10 w-[2px] h-[2.5rem] bg-gradient-to-b from-[#865CF7] to-[#5435AA]"></div>
               </div>
 
-              <div className="flex items-center gap-6 relative">
-                <div className="relative w-10 h-10 flex items-center justify-center">
+              <div className="flex flex-row items-start gap-6 relative min-w-0">
+                <div className="relative w-10 h-10 flex items-center justify-center shrink-0">
                   <Image src="/images/bg-bullet.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">02</span>
                 </div>
-                <span className="text-stage-lightGray text-xl">
-                  Snapshot on the 18th of December at 2PM UTC
-                </span>
-                {/* Línea vertical al siguiente bullet */}
+                <div className="min-w-0 flex-1">
+                  <span className="text-stage-lightGray text-base sm:text-xl break-words">
+                    Snapshot on the 18th of December at 2PM UTC
+                  </span>
+                </div>
                 <div className="absolute left-5 top-10 w-[2px] h-[2.5rem] bg-gradient-to-b from-[#865CF7] to-[#5435AA]"></div>
               </div>
 
-              <div className="flex items-center gap-6">
-                <div className="relative w-10 h-10 flex items-center justify-center">
+              <div className="flex flex-row items-start gap-6 min-w-0">
+                <div className="relative w-10 h-10 flex items-center justify-center shrink-0">
                   <Image src="/images/bg-bullet.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">03</span>
                 </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-stage-lightGray text-xl">
-                    Claim Your Prize In:
-                  </span>
-                  <CountdownTimer />
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                    <span className="text-stage-lightGray text-base sm:text-xl whitespace-normal sm:whitespace-nowrap">
+                      Claim Your Prize In:
+                    </span>
+                    <CountdownTimer />
+                  </div>
                 </div>
               </div>
             </div>
