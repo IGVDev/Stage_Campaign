@@ -95,25 +95,21 @@ const prizes = [
   },
   {
     name: "Rolex",
-    suffix: "(1x)",
+    suffix: "(2x)",
     image: "/images/grid/02.png",
   },
   {
     name: "Playstation 5",
-    suffix: "(1x)",
+    suffix: "(10x)",
     image: "/images/grid/03.png",
   },
   {
     name: "iPhone 16 Pro",
-    suffix: "(1x)",
+    suffix: "(5x)",
     image: "/images/grid/04.png",
   },
   {
-    name: "1,00,000 $Stage",
-    image: "/images/grid/05.png",
-  },
-  {
-    name: "100 $Stage",
+    name: "50 $Stage",
     image: "/images/grid/05.png",
   },
   {
@@ -122,6 +118,10 @@ const prizes = [
   },
   {
     name: "10 $Stage",
+    image: "/images/grid/05.png",
+  },
+  {
+    name: "5 $Stage",
     image: "/images/grid/05.png",
   },
   {
