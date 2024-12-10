@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <div className="relative bg-whitesmoke w-full min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 flex flex-row w-full max-w-[90rem] mx-auto mb-[3.125rem] text-white pt-6 px-[0.625rem] sm:px-[2.5rem]">          
+      <main className="flex-1 flex flex-row w-full max-w-[90rem] mx-auto mb-[2.5rem] text-white pt-6 px-[0.625rem] sm:px-[2.5rem]">          
         <section className="flex-1 flex">
           <SuperCampHome />
         </section>

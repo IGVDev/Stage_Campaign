@@ -213,12 +213,12 @@ const SuperCampHome: React.FC = () => {
               <h1 className="text-3xl md:text-3xl lg:text-[2rem] font-bold text-white mb-3 md:mb-[20px] leading-tight">
                 Spin And Win $STAGE And More!
               </h1>
-              <p className="text-white font-medium text-sm md:text-[1rem] sm:w-9/12 lg:w-full sm:text-[1.1rem] mb-4 md:mb-[2rem] leading-[1.4]">
+              <p className="text-white font-medium text-sm md:text-[1rem] sm:w-9/12 lg:w-[600px] sm:text-[1.1rem] mb-4 md:mb-[2rem] leading-[1.4]">
                 Spin to win $STAGE & other prizes such as: Tesla Model S white,
                 iPhone 16 Pro, Rolex, Playstation 5 And USDT.
               </p>
               <button
-                className="rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit mb-4 md:mb-0"
+                className="mt-[25px] lg:mt-[0] rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit mb-4 md:mb-0"
                 onClick={() =>
                   window.open(
                     "https://staking.stage.community/",
@@ -227,7 +227,7 @@ const SuperCampHome: React.FC = () => {
                   )
                 }
               >
-                <div className="px-6 py-2 rounded-full text-[#7949F6] font-medium bg-white hover:bg-[#865CF7] hover:text-white">
+                <div className="px-12 py-4 lg:px-6 lg:py-2 rounded-full text-[#7949F6] font-medium bg-white hover:bg-[#865CF7] hover:text-white text-[1.3rem] lg:text-[1rem]">
                   <span>Stake Now</span>
                 </div>
               </button>
