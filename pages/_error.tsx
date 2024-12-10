@@ -1,7 +1,10 @@
 import { NextPage } from 'next';
-import { ErrorProps } from 'next/error';
 
-const Error: NextPage<ErrorProps> = ({ statusCode }) => {
+interface CustomErrorProps {
+  statusCode: number;
+}
+
+const Error: NextPage<CustomErrorProps> = ({ statusCode }) => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-whitesmoke">
       <div className="text-center">
@@ -18,7 +21,7 @@ const Error: NextPage<ErrorProps> = ({ statusCode }) => {
   );
 };
 
-Error.getInitialProps = ({ res, err }) => {
+Error.getInitialProps = ({ res, err }: any) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };
 };
