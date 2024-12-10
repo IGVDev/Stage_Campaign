@@ -218,7 +218,7 @@ const SuperCampHome: React.FC = () => {
                 iPhone 16 Pro, Rolex, Playstation 5 And USDT.
               </p>
               <button
-                className="p-[1px] rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit mb-4 md:mb-6"
+                className="rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit mb-4 md:mb-0"
                 onClick={() =>
                   window.open(
                     "https://staking.stage.community/",
