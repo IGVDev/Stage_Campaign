@@ -232,7 +232,7 @@ const SuperCampHome: React.FC = () => {
                   <Image src="/images/bg-bullet.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">02</span>
                 </div>
-                <span className="text-stage-lightGray text-xl">Snapshot on the 18th of December at 4PM UTC</span>
+                <span className="text-stage-lightGray text-xl">Snapshot on the 18th of December at 2PM UTC</span>
                 {/* Línea vertical al siguiente bullet */}
                 <div className="absolute left-5 top-10 w-[2px] h-[2.5rem] bg-gradient-to-b from-[#865CF7] to-[#5435AA]"></div>
               </div>
