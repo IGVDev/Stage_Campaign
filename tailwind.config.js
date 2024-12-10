@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'ipad': '810px',
+      },
       fontFamily: {
         sans: ['Satoshi-Variable', 'sans-serif'],
       },

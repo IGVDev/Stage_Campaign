@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useCallback, useState } from "react";
 import { Button } from "@mui/material";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 type HeaderProps = {
   className?: string;
@@ -47,12 +48,21 @@ const Header: NextPage<HeaderProps> = ({
   };
 
   return (
-    <header
-        className={`self-stretch border-bottom-gradient box-border overflow-hidden h-[6.25rem] px-[2.5rem] top-[0] z-[99] sticky flex items-center ${className}`}
-      >
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`self-stretch border-bottom-gradient box-border overflow-hidden h-[6.25rem] px-[2.5rem] top-[0] z-[99] sticky flex items-center ${className}`}
+    >
       <div className="w-[85rem] mx-auto flex flex-row items-center justify-between gap-[1.25rem]">
         <div id="brand" >
-          <div id="stage-icon" className="block lg:hidden">          
+          <motion.div 
+            id="stage-icon" 
+            className="block ipad:hidden"
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+          >          
               <Image
                 className="h-[2.625rem] w-[2.625rem] relative"
                 loading="lazy"
@@ -61,8 +71,8 @@ const Header: NextPage<HeaderProps> = ({
                 alt="Stage Community"
                 src="/images/stage-icon.svg"
               />
-          </div>
-          <div id="stage_logo" className="hidden lg:block">
+          </motion.div>
+          <div id="stage_logo" className="hidden ipad:block">
             <Image
               className="h-[2.625rem] w-[9.0625rem] relative"
               loading="lazy"
@@ -73,7 +83,7 @@ const Header: NextPage<HeaderProps> = ({
             />
           </div>                   
         </div>   
-        <div className="relative flex flex-col items-center justify-center">
+        <div id="main_nav_container" className="relative flex flex-col items-center justify-center hidden ipad:flex">
           <div id="blury" className="absolute w-[33.3125rem] h-[3.5rem] [filter:blur(60px)] rounded-81xl bg-stage-primary opacity-20 z-0" />
           <div id="header_nav" className="relative w-[30.3125rem] h-[3.5rem] border-gradient bg-stage-background rounded-full flex items-center gap-[0.312rem] p-[0.5rem] z-10 opacity-70" >
             <Button
@@ -110,9 +120,9 @@ const Header: NextPage<HeaderProps> = ({
             </Button>
           </div>          
         </div>
-        <div id="spacer" className="h-[2.625rem] w-[2.625rem] lg:w-[9.0625rem] relative" />
+        <div id="spacer" className="h-[2.625rem] w-[2.625rem] ipad:w-[9.0625rem] relative hidden ipad:block" />
       </div>
-    </header>
+    </motion.header>
   );
 };
 

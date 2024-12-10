@@ -130,22 +130,23 @@ const SuperCampHome: React.FC = () => {
               opacity: '0.1'
             }}
           />
-          <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start lg:justify-between h-full gap-6">
+          <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-center lg:justify-between h-full gap-6">
             <motion.div 
-              className="relative w-full md:w-[300px] lg:w-[400px] h-[150px] md:h-[200px] lg:order-2"
-              initial={{ opacity: 0, x: 500 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+              className="relative w-full md:w-[300px] lg:w-[408px] h-[150px] md:h-[200px] lg:h-[249px] lg:order-2"
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: -32, opacity: 1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <Image
                 src="/images/prizes.png" 
                 alt="Prizes" 
                 fill
-                className="object-contain"
+                className="object-contain mr-[64px]"
+                priority
               />
             </motion.div>
             <motion.div 
-              className="flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:max-w-[605px]"
+              className="flex flex-col justify-between items-center lg:items-start text-center lg:text-left w-full lg:max-w-[605px] h-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
@@ -163,7 +164,7 @@ const SuperCampHome: React.FC = () => {
                 className="p-[1px] rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit mb-4 md:mb-6"
                 onClick={() => window.open('https://staking.stage.community/', '_blank', 'noopener,noreferrer')}
               >
-                <div className="px-8 md:px-10 py-3 md:py-4 rounded-full text-[#7949F6] font-medium bg-white hover:bg-[#865CF7] hover:text-white text-base md:text-lg">
+                <div className="px-6 py-2 rounded-full text-[#7949F6] font-medium bg-white hover:bg-[#865CF7] hover:text-white">
                   <span>Stake Now</span>
                 </div>
               </button>
@@ -222,7 +223,7 @@ const SuperCampHome: React.FC = () => {
                   <Image src="/images/bg-bullet-active.svg" alt="bullet" fill />
                   <span className="relative z-10 text-white">01</span>
                 </div>
-                <span className="text-white text-xl">Stake $STAGE Tokens on staking.stage.community</span>
+                <span className="text-white text-xl">Stake $STAGE Tokens on <a href="https://staking.stage.community" target="_blank" rel="noopener noreferrer" className="text-[#D0BEFF] hover:opacity-80 transition-opacity">staking.stage.community</a></span>
                 {/* Línea vertical al siguiente bullet */}
                 <div className="absolute left-5 top-10 w-[2px] h-[2.5rem] bg-gradient-to-b from-[#865CF7] to-[#5435AA]"></div>
               </div>
