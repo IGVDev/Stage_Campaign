@@ -135,15 +135,36 @@ const prizes = [
 ];
 
 const SuperCampHome: React.FC = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    setIsDesktop(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  const variants = {
+    mobile: {
+      initial: { y: -50, opacity: 0 },
+      animate: { y: 0, opacity: 1 }
+    },
+    desktop: {
+      initial: { x: 100, opacity: 0 },
+      animate: { x: 0, opacity: 1 }
+    }
+  };
+
   return (
     <section className="flex-1 flex flex-col gap-6">
       <article>
         <div
           id="topCard"
-          className="self-stretch rounded-3xl relative w-full min-h-[18.0625rem] p-4 md:p-8 lg:p-[2rem]"
+          className="self-stretch rounded-3xl relative w-full min-h-[18.0625rem] p-8 md:p-8 lg:p-[2rem]"
           style={{ backgroundColor: "#865CF7" }}
         >
-          {/* Background image with 10% opacity */}
           <div
             className="absolute inset-0 bg-cover bg-center z-0 rounded-3xl"
             style={{
@@ -153,10 +174,24 @@ const SuperCampHome: React.FC = () => {
           />
           <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-center lg:justify-between h-full gap-6">
             <motion.div
-              className="relative w-full max-w-[408px] aspect-[408/249] lg:order-2"
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
+              className="lg:hidden relative w-full max-w-[408px] aspect-[408/249]"
+              initial={{ opacity: 0, y: -50, x: 0 }}
+              animate={{ opacity: 1, y: 0, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Image
+                src="/images/prizes.png"
+                alt="Prizes"
+                fill
+                className="object-contain"
+                priority
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden lg:block relative w-full max-w-[408px] aspect-[408/249] lg:order-2"
             >
               <Image
                 src="/images/prizes.png"
@@ -204,7 +239,7 @@ const SuperCampHome: React.FC = () => {
         <h2 className="h2-title">Claim Your Prize in 3 Steps</h2>
         <div
           id="middleCard"
-          className="self-stretch rounded-3xl relative w-full h-[18.0625rem] p-[2rem] flex items-center"
+          className="self-stretch rounded-3xl relative w-full min-h-[18.0625rem] py-[4rem] px-[1.5rem] md:p-[2rem] flex items-center"
           style={{ backgroundColor: "#12152F" }}
         >
           <div className="absolute inset-0 overflow-hidden rounded-3xl">
