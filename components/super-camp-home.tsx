@@ -162,7 +162,6 @@ const SuperCampHome: React.FC = () => {
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             >
               <Image
-<<<<<<< HEAD
                 src="/Stage_Campaign/images/prizes.png" 
                 alt="Prizes" 
                 fill
