@@ -61,104 +61,75 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
   const checkWallet = async () => {
     console.log('1. Iniciando checkWallet');
     
-    // Verificar si existe window.ethereum
-    if (!(window as any).ethereum) {
-      console.log('2. MetaMask no está instalado');
-      setWalletError('Please install MetaMask to continue.');
-      setShowWalletModal(true);
-      return false;
-    }
-    console.log('2. MetaMask está instalado');
-
+    // Usar wallet ficticia para pruebas
+    const walletAddress = "0x91a30eebb43e1700435f40af0706260485d7d0d7";
+    console.log('6. Usando wallet de prueba:', walletAddress);
+    
     try {
-      console.log('3. Intentando conectar con MetaMask');
-      const provider = new ethers.BrowserProvider((window as any).ethereum);
-      
-      console.log('4. Solicitando cuentas');
-      const accounts = await provider.send("eth_requestAccounts", []);
-      console.log('5. Cuentas obtenidas:', accounts);
-      
-      if (accounts.length === 0) {
-        console.log('6. No se encontraron cuentas');
-        setWalletError('Please connect your wallet.');
+      if (hasClaimed) {
+        setWalletError('You have already been rewarded.');
         setShowWalletModal(true);
         return false;
       }
 
-      const walletAddress = accounts[0].toLowerCase();
-      console.log('6. Wallet conectada:', walletAddress);
+      console.log('8. Realizando fetch a Firebase');
+      const firebaseUrl = 'https://us-central1-raffle-stage-baa32.cloudfunctions.net/checkWallet';
       
-      try {
-        if (hasClaimed) {
-          setWalletError('You have already been rewarded.');
-          setShowWalletModal(true);
-          return false;
-        }
+      const response = await fetch(firebaseUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ walletAddress })
+      });
 
-        console.log('8. Realizando fetch a Firebase');
-        const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-        const firebaseUrl = 'https://us-central1-raffle-stage-baa32.cloudfunctions.net/checkWallet';
-        
-        const response = await fetch(corsProxy + firebaseUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Origin': window.location.origin
-          },
-          body: JSON.stringify({ walletAddress })
-        });
+      console.log('9. Status de la respuesta:', response.status);
 
-        console.log('9. Status de la respuesta:', response.status);
+      // Primero obtener la respuesta como texto
+      const data = await response.json();
+      console.log('Respuesta del servidor:', data);
 
-        // Primero obtener la respuesta como texto
-        const data = await response.json();
-        console.log('Respuesta del servidor:', data);
-
-        let finalAngle = 0;
-        if (data.prize === "7") {
-          console.log('Entrando en condición premio 7');
-          // Premio USDT - ajustar este ángulo según la posición de la ruleta
-          finalAngle = 45;
-          const message = 'Congrats you won 5 USDT!';
-          setPrizeMessage(message);
-          localStorage.setItem('prizeMessage', message);
-          setHasClaimed(true);
-          localStorage.setItem('hasSpun', 'true');
-        } else if (data.prize === "8") {
-          console.log('Entrando en condición premio 8');
-          // Premio STAGE - ajustar este ángulo según la posición de la ruleta
-          finalAngle = 180;
-          const message = 'Congrats you won $5 STAGE!';
-          setPrizeMessage(message);
-          localStorage.setItem('prizeMessage', message);
-          setHasClaimed(true);
-          localStorage.setItem('hasSpun', 'true');
-        } else if (!data.success || data.message === 'wallet not found') {
-          console.log('Entrando en condición wallet not found');
-          // Sin premio - gira a una posición neutral
-          finalAngle = 0;
-          setPrizeMessage('This wallet hasn\'t staked during the campaign');
-        } else {
-          console.log('Entrando en condición else');
-          finalAngle = 360;
-          setPrizeMessage('An error ocurred while checking your wallet');
-        }
-
-        console.log('Ángulo final seleccionado:', finalAngle);
-        // Agregamos 3 vueltas completas antes del ángulo final
-        const totalRotation = (360 * 6) + finalAngle;
-        setCurrentRotation(totalRotation);
-
-        return totalRotation;
-      } catch (error: any) {
-        console.error('Error en el proceso:', error);
-        setWalletError(error.message || 'An error ocurred while checking your wallet');
+      let finalAngle = 0;
+      if (data.prize === "7") {
+        console.log('Entrando en condición premio 7');
+        // Premio USDT - ajustar este ángulo según la posición de la ruleta
+        finalAngle = 45;
+        const message = 'Congrats you won 5 USDT!';
+        setPrizeMessage(message);
+        localStorage.setItem('prizeMessage', message);
+        setHasClaimed(true);
+        localStorage.setItem('hasSpun', 'true');
+      } else if (data.prize === "8") {
+        console.log('Entrando en condición premio 8');
+        // Premio STAGE - ajustar este ángulo según la posición de la ruleta
+        finalAngle = 180;
+        const message = 'Congrats you won $5 STAGE!';
+        setPrizeMessage(message);
+        localStorage.setItem('prizeMessage', message);
+        setHasClaimed(true);
+        localStorage.setItem('hasSpun', 'true');
+      } else if (!data.success || data.message === 'wallet not found') {
+        console.log('Entrando en condición wallet not found');
+        // Sin premio - no giramos la ruleta
+        setWalletError('This wallet hasn\'t staked during the campaign');
+        setShowWalletModal(true);
+        return false;
+      } else {
+        console.log('Entrando en condición else');
+        setWalletError('An error ocurred while checking your wallet');
         setShowWalletModal(true);
         return false;
       }
-    } catch (error) {
-      console.log('Error en el proceso:', error);
-      setWalletError('An error ocurred while checking your wallet');
+
+      console.log('Ángulo final seleccionado:', finalAngle);
+      // Agregamos 6 vueltas completas antes del ángulo final
+      const totalRotation = (360 * 6) + finalAngle;
+      setCurrentRotation(totalRotation);
+
+      return totalRotation;
+    } catch (error: any) {
+      console.error('Error en el proceso:', error);
+      setWalletError(error.message || 'An error ocurred while checking your wallet');
       setShowWalletModal(true);
       return false;
     }
