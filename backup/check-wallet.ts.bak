@@ -1,36 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-type ErrorResponse = {
-  message: string;
-  details?: any;
-}
-
-type SuccessResponse = {
-  success: boolean;
-  prize?: string;
-}
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<SuccessResponse | ErrorResponse>
-) {
-  // Solo permitir POST
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
-    res.setHeader('Content-Type', 'application/json');
-    return res.status(405).json({ message: 'Method not allowed' });
+    return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
 
   try {
     const { walletAddress } = req.body;
-    
+
     if (!walletAddress) {
-      res.setHeader('Content-Type', 'application/json');
-      return res.status(400).json({ message: 'Wallet address is required' });
+      return res.status(400).json({ success: false, message: 'Wallet address is required' });
     }
 
-    // Llamar a Firebase
+    // Call Firebase
     const firebaseUrl = 'https://us-central1-raffle-stage-baa32.cloudfunctions.net/checkWallet';
-    console.log('Llamando a Firebase:', { url: firebaseUrl, wallet: walletAddress });
+    console.log('Calling Firebase:', { url: firebaseUrl, wallet: walletAddress });
 
     const response = await fetch(firebaseUrl, {
       method: 'POST',
@@ -41,17 +25,17 @@ export default async function handler(
       body: JSON.stringify({ walletAddress }),
     });
 
-    console.log('Respuesta de Firebase:', { 
+    console.log('Firebase Response:', { 
       status: response.status,
       statusText: response.statusText,
       headers: Object.fromEntries(response.headers)
     });
 
-    // Obtener el texto de la respuesta
+    // Get the response text
     const responseText = await response.text();
-    console.log('Respuesta raw de Firebase:', responseText);
+    console.log('Raw Firebase Response:', responseText);
 
-    // Si la respuesta no es exitosa
+    // If the response is not successful
     if (!response.ok) {
       res.setHeader('Content-Type', 'application/json');
       return res.status(response.status).json({ 
@@ -60,13 +44,13 @@ export default async function handler(
       });
     }
 
-    // Intentar parsear la respuesta como JSON
+    // Try to parse the response as JSON
     try {
       const data = JSON.parse(responseText);
       res.setHeader('Content-Type', 'application/json');
       return res.status(200).json(data);
     } catch (parseError) {
-      console.error('Error parseando respuesta de Firebase:', parseError);
+      console.error('Error parsing Firebase response:', parseError);
       res.setHeader('Content-Type', 'application/json');
       return res.status(500).json({ 
         message: 'Invalid JSON response from Firebase',
@@ -74,11 +58,7 @@ export default async function handler(
       });
     }
   } catch (error: any) {
-    console.error('Error general:', error);
-    res.setHeader('Content-Type', 'application/json');
-    return res.status(500).json({ 
-      message: 'Server error',
-      details: error.message 
-    });
+    console.error('General error:', error);
+    return res.status(500).json({ success: false, message: 'Internal server error' });
   }
 }

@@ -59,35 +59,35 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
   }, []);
 
   const checkWallet = async () => {
-    console.log('1. Iniciando checkWallet');
+    console.log('1. Starting checkWallet');
     
     // Verificar si existe window.ethereum
     if (!(window as any).ethereum) {
-      console.log('2. MetaMask no está instalado');
+      console.log('2. MetaMask is not installed');
       setWalletError('Please install MetaMask to continue.');
       setShowWalletModal(true);
       return false;
     }
 
-    console.log('2. MetaMask está instalado');
+    console.log('2. MetaMask is installed');
 
     try {
-      console.log('3. Intentando conectar con MetaMask');
+      console.log('3. Attempting to connect to MetaMask');
       const provider = new ethers.BrowserProvider((window as any).ethereum);
       
-      console.log('4. Solicitando cuentas');
+      console.log('4. Requesting accounts');
       const accounts = await provider.send("eth_requestAccounts", []);
-      console.log('5. Cuentas obtenidas:', accounts);
+      console.log('5. Accounts obtained:', accounts);
       
       if (accounts.length === 0) {
-        console.log('6. No se encontraron cuentas');
+        console.log('6. No accounts found');
         setWalletError('Please connect your wallet.');
         setShowWalletModal(true);
         return false;
       }
 
       const walletAddress = accounts[0].toLowerCase();
-      console.log('6. Wallet conectada:', walletAddress);
+      console.log('6. Wallet connected:', walletAddress);
       
       try {
         if (hasClaimed) {
@@ -96,7 +96,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
           return false;
         }
 
-        console.log('8. Realizando fetch a Firebase');
+        console.log('8. Making fetch to Firebase');
         const firebaseUrl = 'https://us-central1-raffle-stage-baa32.cloudfunctions.net/checkWallet';
         
         const response = await fetch(firebaseUrl, {
@@ -107,15 +107,15 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
           body: JSON.stringify({ walletAddress })
         });
 
-        console.log('9. Status de la respuesta:', response.status);
+        console.log('9. Response status:', response.status);
 
         // Primero obtener la respuesta como texto
         const data = await response.json();
-        console.log('Respuesta del servidor:', data);
+        console.log('Server response:', data);
 
         let finalAngle = 0;
         if (data.prize === "7") {
-          console.log('Entrando en condición premio 7');
+          console.log('Entering prize condition 7');
           // Premio USDT - ajustar este ángulo según la posición de la ruleta
           finalAngle = 45;
           const message = 'Congrats you won 5 USDT!';
@@ -124,7 +124,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
           setHasClaimed(true);
           localStorage.setItem('hasSpun', 'true');
         } else if (data.prize === "8") {
-          console.log('Entrando en condición premio 8');
+          console.log('Entering prize condition 8');
           // Premio STAGE - ajustar este ángulo según la posición de la ruleta
           finalAngle = 180;
           const message = 'Congrats you won $5 STAGE!';
@@ -133,53 +133,67 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
           setHasClaimed(true);
           localStorage.setItem('hasSpun', 'true');
         } else if (!data.success || data.message === 'wallet not found') {
-          console.log('Entrando en condición wallet not found');
+          console.log('Entering wallet not found condition');
           // Sin premio - gira a una posición neutral
           finalAngle = 0;
           setPrizeMessage('This wallet hasn\'t staked during the campaign');
         } else {
-          console.log('Entrando en condición else');
+          console.log('Entering else condition');
           finalAngle = 360;
-          setPrizeMessage('An error ocurred while checking your wallet');
+          setPrizeMessage('An error occurred while checking your wallet');
         }
 
-        console.log('Ángulo final seleccionado:', finalAngle);
+        console.log('Final angle selected:', finalAngle);
         // Agregamos 6 vueltas completas antes del ángulo final
         const totalRotation = (360 * 6) + finalAngle;
         setCurrentRotation(totalRotation);
 
         return totalRotation;
       } catch (error: any) {
-        console.error('Error en el proceso:', error);
-        setWalletError(error.message || 'An error ocurred while checking your wallet');
+        console.error('Error in the process:', error);
+        // Manejo de errores específicos
+        if (error.message?.includes('User rejected')) {
+          setWalletError('Connection cancelled. Please try again.');
+        } else if (error.message?.includes('JSON')) {
+          setWalletError('Connection error. Please try again later.');
+        } else {
+          setWalletError('An error occurred. Please try again.');
+        }
         setShowWalletModal(true);
         return false;
       }
     } catch (error: any) {
-      console.error('Error en el proceso:', error);
-      setWalletError(error.message || 'An error ocurred while checking your wallet');
+      console.error('Error in the process:', error);
+      // Manejo de errores específicos
+      if (error.message?.includes('User rejected')) {
+        setWalletError('Connection cancelled. Please try again.');
+      } else if (error.message?.includes('JSON')) {
+        setWalletError('Connection error. Please try again later.');
+      } else {
+        setWalletError('An error occurred. Please try again.');
+      }
       setShowWalletModal(true);
       return false;
     }
   };
 
   const handleSpin = async () => {
-    console.log('Iniciando handleSpin');
+    console.log('Starting handleSpin');
     if (isSpinning || hasClaimed) {
-      console.log('Ya está girando o ya giró');
+      console.log('Already spinning or already spun');
       return;
     }
     
     setIsSpinning(true);
     const angle = await checkWallet();
-    console.log('Ángulo recibido:', angle);
+    console.log('Angle received:', angle);
     if (angle === false) {
-      console.log('No se pudo obtener el ángulo');
+      console.log('Could not get angle');
       setIsSpinning(false);
       return;
     }
 
-    console.log('Iniciando giro con ángulo:', angle);
+    console.log('Starting spin with angle:', angle);
     setIsSpinning(true);
     setHasSpun(true);
 
@@ -188,7 +202,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
     setCurrentRotation(totalRotation);
 
     setTimeout(() => {
-      console.log('Giro completado');
+      console.log('Spin completed');
       setIsSpinning(false);
       onSpinEnd?.();
     }, 5000);
