@@ -89,37 +89,35 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
       const data = await response.json();
       console.log('Respuesta del servidor:', data);
 
-      let finalAngle = 0;
-      if (data.prize === "7") {
-        console.log('Entrando en condición premio 7');
-        // Premio USDT - ajustar este ángulo según la posición de la ruleta
-        finalAngle = 45;
-        const message = 'Congrats you won 5 USDT!';
-        setPrizeMessage(message);
-        localStorage.setItem('prizeMessage', message);
-        setHasClaimed(true);
-        localStorage.setItem('hasSpun', 'true');
-      } else if (data.prize === "8") {
-        console.log('Entrando en condición premio 8');
-        // Premio STAGE - ajustar este ángulo según la posición de la ruleta
-        finalAngle = 180;
-        const message = 'Congrats you won $5 STAGE!';
-        setPrizeMessage(message);
-        localStorage.setItem('prizeMessage', message);
-        setHasClaimed(true);
-        localStorage.setItem('hasSpun', 'true');
-      } else if (!data.success || data.message === 'wallet not found') {
-        console.log('Entrando en condición wallet not found');
-        // Sin premio - no giramos la ruleta
-        setWalletError('This wallet hasn\'t staked during the campaign');
-        setShowWalletModal(true);
-        return false;
-      } else {
-        console.log('Entrando en condición else');
-        setWalletError('An error ocurred while checking your wallet');
-        setShowWalletModal(true);
-        return false;
-      }
+        let finalAngle = 0;
+        if (data.prize === "7") {
+          console.log('Entrando en condición premio 7');
+          // Premio USDT - ajustar este ángulo según la posición de la ruleta
+          finalAngle = 45;
+          const message = 'Congrats you won 5 USDT!';
+          setPrizeMessage(message);
+          localStorage.setItem('prizeMessage', message);
+          setHasClaimed(true);
+          localStorage.setItem('hasSpun', 'true');
+        } else if (data.prize === "8") {
+          console.log('Entrando en condición premio 8');
+          // Premio STAGE - ajustar este ángulo según la posición de la ruleta
+          finalAngle = 180;
+          const message = 'Congrats you won $5 STAGE!';
+          setPrizeMessage(message);
+          localStorage.setItem('prizeMessage', message);
+          setHasClaimed(true);
+          localStorage.setItem('hasSpun', 'true');
+        } else if (!data.success || data.message === 'wallet not found') {
+          console.log('Entrando en condición wallet not found');
+          // Sin premio - gira a una posición neutral
+          finalAngle = 0;
+          setPrizeMessage('This wallet hasn\'t staked during the campaign');
+        } else {
+          console.log('Entrando en condición else');
+          finalAngle = 360;
+          setPrizeMessage('An error ocurred while checking your wallet');
+        }
 
       console.log('Ángulo final seleccionado:', finalAngle);
       // Agregamos 6 vueltas completas antes del ángulo final
