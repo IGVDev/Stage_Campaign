@@ -136,7 +136,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
         } else if (!data.success || data.message === 'wallet not found') {
           console.log('Entrando en condición wallet not found');
           // Sin premio - gira a una posición neutral
-          finalAngle = 0;
+          // finalAngle = 0;
           setPrizeMessage('This wallet hasn\'t staked during the campaign');
         } else {
           console.log('Entrando en condición else');
