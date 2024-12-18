@@ -23,8 +23,8 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ onOpenDialog }) => {
 
   useEffect(() => {
     // Establecer la fecha objetivo 18 de Diciembre a las 14hs UTC
-    //const targetDate = new Date("2024-12-18T14:00:00Z");
-    const targetDate = new Date("2024-12-16T14:00:00Z");
+    const targetDate = new Date("2024-12-18T14:00:00Z");
+    //const targetDate = new Date("2024-12-16T14:00:00Z");
 
     const calculateTimeLeft = () => {
       const now = new Date();
