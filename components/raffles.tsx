@@ -1,9 +1,14 @@
 import Image from "next/image";
-import { Button } from "@mui/material";
+import { Button, Dialog } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import SpinWheel from "./SpinWheel";
 
-const CountdownTimer: React.FC = () => {
+interface CountdownTimerProps {
+  onOpenDialog: () => void;
+}
+
+const CountdownTimer: React.FC<CountdownTimerProps> = ({ onOpenDialog }) => {
   const [timeLeft, setTimeLeft] = useState<{
     days: number;
     hours: number;
@@ -19,6 +24,7 @@ const CountdownTimer: React.FC = () => {
   useEffect(() => {
     // Establecer la fecha objetivo 18 de Diciembre a las 5pm UTC
     const targetDate = new Date("2024-12-18T14:00:00Z");
+    //const targetDate = new Date("2024-12-16T14:00:00Z");
 
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -57,16 +63,10 @@ const CountdownTimer: React.FC = () => {
     return (
       <button
         className="p-[1px] rounded-full bg-gradient-to-r from-[#D0BEFF] to-[#A98AF9] hover:opacity-90 transition-opacity cursor-pointer w-fit"
-        onClick={() =>
-          window.open(
-            "https://www.stage.community/",
-            "_blank",
-            "noopener,noreferrer"
-          )
-        }
+        onClick={onOpenDialog}
       >
-        <div className="px-6 py-2 rounded-full text-[#7949F6] font-medium bg-white hover:bg-[#865CF7] hover:text-white">
-          <span>Stake Now</span>
+        <div className="px-6 py-2 rounded-full text-white font-bold bg-gradient-to-r from-[#A98AF9] to-[#D0BEFF] hover:bg-[#865CF7] hover:text-white">
+          <span>Spin to Claim Prize</span>
         </div>
       </button>
     );
@@ -134,27 +134,22 @@ const prizes = [
   },
 ];
 
-const SuperCampHome: React.FC = () => {
+const RafflesComponent: React.FC = () => {
   const [isDesktop, setIsDesktop] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1024px)');
-    setIsDesktop(mediaQuery.matches);
-
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const variants = {
-    mobile: {
-      initial: { y: -50, opacity: 0 },
-      animate: { y: 0, opacity: 1 }
-    },
-    desktop: {
-      initial: { x: 100, opacity: 0 },
-      animate: { x: 0, opacity: 1 }
-    }
+  const handleSpinEnd = () => {
+    // Aquí puedes manejar lo que sucede cuando termina el giro
+    console.log("El giro ha terminado!");
   };
 
   return (
@@ -328,7 +323,7 @@ const SuperCampHome: React.FC = () => {
                     <span className="text-stage-lightGray text-base sm:text-xl whitespace-normal sm:whitespace-nowrap">
                       Claim Your Prize In:
                     </span>
-                    <CountdownTimer />
+                    <CountdownTimer onOpenDialog={() => setOpenDialog(true)} />
                   </div>
                 </div>
               </div>
@@ -366,8 +361,31 @@ const SuperCampHome: React.FC = () => {
           </div>
         </div>
       </article>
+
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          style: {
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+            overflow: 'hidden',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          },
+        }}
+      >
+        <SpinWheel 
+          finalAngle={45} 
+          onSpinEnd={handleSpinEnd}
+          isVisible={openDialog}
+        />
+      </Dialog>
     </section>
   );
 };
 
-export default SuperCampHome;
+export default RafflesComponent;

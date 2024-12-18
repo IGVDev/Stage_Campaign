@@ -9,10 +9,8 @@ const NotFound: NextPage = () => {
         <p className="text-lg mb-6">
           The page you are looking for might have been removed or is temporarily unavailable.
         </p>
-        <Link href="/">
-          <a className="text-[#865CF7] hover:text-[#5435AA] underline">
-            Return to Home
-          </a>
+        <Link href="/" className="text-[#865CF7] hover:text-[#5435AA] underline">
+          Return to Home
         </Link>
       </div>
     </div>

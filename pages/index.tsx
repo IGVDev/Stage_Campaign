@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import Header from "../components/header";
-import SuperCampHome from "../components/super-camp-home";
+import RafflesComponent from "../components/raffles";
+// import SuperCampHome from "../components/super-camp-home";
 
 const Home: NextPage = () => {
   const [activeCompareButtons, setActiveCompareButtons] = useState<{ [key: string]: string | null }>({});
@@ -11,7 +12,7 @@ const Home: NextPage = () => {
       <Header />
       <main className="flex-1 flex flex-row w-full max-w-[90rem] mx-auto mb-[2.5rem] text-white pt-6 px-[0.625rem] sm:px-[2.5rem]">          
         <section className="flex-1 flex">
-          <SuperCampHome />
+          <RafflesComponent />
         </section>
       </main>
     </div>
