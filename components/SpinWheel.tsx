@@ -61,33 +61,57 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
   const checkWallet = async () => {
     console.log('1. Iniciando checkWallet');
     
-    // Usar wallet ficticia para pruebas
-    const walletAddress = "0x91a30eebb43e1700435f40af0706260485d7d0d7";
-    console.log('6. Usando wallet de prueba:', walletAddress);
-    
+    // Verificar si existe window.ethereum
+    if (!(window as any).ethereum) {
+      console.log('2. MetaMask no está instalado');
+      setWalletError('Please install MetaMask to continue.');
+      setShowWalletModal(true);
+      return false;
+    }
+
+    console.log('2. MetaMask está instalado');
+
     try {
-      if (hasClaimed) {
-        setWalletError('You have already been rewarded.');
+      console.log('3. Intentando conectar con MetaMask');
+      const provider = new ethers.BrowserProvider((window as any).ethereum);
+      
+      console.log('4. Solicitando cuentas');
+      const accounts = await provider.send("eth_requestAccounts", []);
+      console.log('5. Cuentas obtenidas:', accounts);
+      
+      if (accounts.length === 0) {
+        console.log('6. No se encontraron cuentas');
+        setWalletError('Please connect your wallet.');
         setShowWalletModal(true);
         return false;
       }
 
-      console.log('8. Realizando fetch a Firebase');
-      const firebaseUrl = 'https://us-central1-raffle-stage-baa32.cloudfunctions.net/checkWallet';
+      const walletAddress = accounts[0].toLowerCase();
+      console.log('6. Wallet conectada:', walletAddress);
       
-      const response = await fetch(firebaseUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ walletAddress })
-      });
+      try {
+        if (hasClaimed) {
+          setWalletError('You have already been rewarded.');
+          setShowWalletModal(true);
+          return false;
+        }
 
-      console.log('9. Status de la respuesta:', response.status);
+        console.log('8. Realizando fetch a Firebase');
+        const firebaseUrl = 'https://us-central1-raffle-stage-baa32.cloudfunctions.net/checkWallet';
+        
+        const response = await fetch(firebaseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ walletAddress })
+        });
 
-      // Primero obtener la respuesta como texto
-      const data = await response.json();
-      console.log('Respuesta del servidor:', data);
+        console.log('9. Status de la respuesta:', response.status);
+
+        // Primero obtener la respuesta como texto
+        const data = await response.json();
+        console.log('Respuesta del servidor:', data);
 
         let finalAngle = 0;
         if (data.prize === "7") {
@@ -119,12 +143,18 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
           setPrizeMessage('An error ocurred while checking your wallet');
         }
 
-      console.log('Ángulo final seleccionado:', finalAngle);
-      // Agregamos 6 vueltas completas antes del ángulo final
-      const totalRotation = (360 * 6) + finalAngle;
-      setCurrentRotation(totalRotation);
+        console.log('Ángulo final seleccionado:', finalAngle);
+        // Agregamos 6 vueltas completas antes del ángulo final
+        const totalRotation = (360 * 6) + finalAngle;
+        setCurrentRotation(totalRotation);
 
-      return totalRotation;
+        return totalRotation;
+      } catch (error: any) {
+        console.error('Error en el proceso:', error);
+        setWalletError(error.message || 'An error ocurred while checking your wallet');
+        setShowWalletModal(true);
+        return false;
+      }
     } catch (error: any) {
       console.error('Error en el proceso:', error);
       setWalletError(error.message || 'An error ocurred while checking your wallet');
