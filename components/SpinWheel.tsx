@@ -99,7 +99,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
         const corsProxy = 'https://cors-anywhere.herokuapp.com/';
         const firebaseUrl = 'https://us-central1-raffle-stage-baa32.cloudfunctions.net/checkWallet';
         
-        const response = await fetch(corsProxy + firebaseUrl, {
+        const response = await fetch(firebaseUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
