@@ -39,47 +39,55 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
   }, [hasClaimed]);
 
   useEffect(() => {
-    if (hasClaimed) {
-      setCurrentRotation(360 * 20000); // Muchas vueltas completas
-      setPrizeMessage(localStorage.getItem('prizeMessage') || '');
+    const hasSpunBefore = localStorage.getItem('hasSpun');
+    const savedMessage = localStorage.getItem('prizeMessage');
+    if (hasSpunBefore === 'true') {
+      setHasSpun(true);
+      setHasClaimed(true);
+      if (savedMessage) {
+        setPrizeMessage(savedMessage);
+        // Establecer el ángulo según el mensaje guardado
+        let finalAngle = 0;
+        if (savedMessage.includes('USDT')) {
+          finalAngle = 45;
+        } else if (savedMessage.includes('STAGE')) {
+          finalAngle = 180;
+        }
+        setCurrentRotation(finalAngle);
+      }
     }
   }, []);
 
   const checkWallet = async () => {
-    //console.log('1. Iniciando checkWallet');
+    console.log('1. Iniciando checkWallet');
     
     // Verificar si existe window.ethereum
     if (!(window as any).ethereum) {
-      //console.log('2. MetaMask no está instalado');
+      console.log('2. MetaMask no está instalado');
       setWalletError('Please install MetaMask to continue.');
       setShowWalletModal(true);
       return false;
     }
-    //console.log('2. MetaMask está instalado');
+    console.log('2. MetaMask está instalado');
 
     try {
-      //console.log('3. Intentando conectar con MetaMask');
+      console.log('3. Intentando conectar con MetaMask');
       const provider = new ethers.BrowserProvider((window as any).ethereum);
       
-      //console.log('4. Solicitando cuentas');
+      console.log('4. Solicitando cuentas');
       const accounts = await provider.send("eth_requestAccounts", []);
-      //console.log('5. Cuentas obtenidas:', accounts);
+      console.log('5. Cuentas obtenidas:', accounts);
       
       if (accounts.length === 0) {
-        //console.log('6. No se encontraron cuentas');
+        console.log('6. No se encontraron cuentas');
         setWalletError('Please connect your wallet.');
         setShowWalletModal(true);
         return false;
       }
 
       const walletAddress = accounts[0].toLowerCase();
-      //console.log('6. Wallet conectada:', walletAddress);
+      console.log('6. Wallet conectada:', walletAddress);
       
-      // Llamada al endpoint
-      //console.log('7. Preparando llamada al endpoint local');
-      const requestBody = { walletAddress };
-      //console.log('Body de la petición:', requestBody);
-
       try {
         if (hasClaimed) {
           setWalletError('You have already been rewarded.');
@@ -87,7 +95,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
           return false;
         }
 
-        //console.log('8. Realizando fetch a Firebase a través de proxy CORS');
+        console.log('8. Realizando fetch a Firebase');
         const corsProxy = 'https://cors-anywhere.herokuapp.com/';
         const firebaseUrl = 'https://us-central1-raffle-stage-baa32.cloudfunctions.net/checkWallet';
         
@@ -100,82 +108,88 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
           body: JSON.stringify({ walletAddress })
         });
 
-        //console.log('9. Status de la respuesta:', response.status);
+        console.log('9. Status de la respuesta:', response.status);
 
         // Primero obtener la respuesta como texto
         const data = await response.json();
-        //console.log('Respuesta del servidor:', data);
+        console.log('Respuesta del servidor:', data);
 
         let finalAngle = 0;
         if (data.prize === "7") {
-          //console.log('Entrando en condición premio 7');
+          console.log('Entrando en condición premio 7');
           // Premio USDT - ajustar este ángulo según la posición de la ruleta
           finalAngle = 45;
-          const message = '¡ Congrats you won 5 USDT !';
+          const message = 'Congrats you won 5 USDT!';
           setPrizeMessage(message);
           localStorage.setItem('prizeMessage', message);
           setHasClaimed(true);
           localStorage.setItem('hasSpun', 'true');
         } else if (data.prize === "8") {
-          //console.log('Entrando en condición premio 8');
+          console.log('Entrando en condición premio 8');
           // Premio STAGE - ajustar este ángulo según la posición de la ruleta
           finalAngle = 180;
-          const message = '¡ Congrats you won 5 STAGE !';
+          const message = 'Congrats you won $5 STAGE!';
           setPrizeMessage(message);
           localStorage.setItem('prizeMessage', message);
           setHasClaimed(true);
           localStorage.setItem('hasSpun', 'true');
         } else if (!data.success || data.message === 'wallet not found') {
-          //console.log('Entrando en condición wallet not found');
+          console.log('Entrando en condición wallet not found');
           // Sin premio - gira a una posición neutral
           finalAngle = 0;
-          setPrizeMessage('Lo sentimos, tu wallet no es elegible para reclamar un premio');
+          setPrizeMessage('This wallet hasn\'t staked during the campaign');
         } else {
-          //console.log('Entrando en condición else');
+          console.log('Entrando en condición else');
           finalAngle = 360;
-          setPrizeMessage('Ha ocurrido un error al verificar tu wallet');
+          setPrizeMessage('An error ocurred while checking your wallet');
         }
 
-        //console.log('Ángulo final seleccionado:', finalAngle);
+        console.log('Ángulo final seleccionado:', finalAngle);
         // Agregamos 3 vueltas completas antes del ángulo final
         const totalRotation = (360 * 6) + finalAngle;
         setCurrentRotation(totalRotation);
 
         return totalRotation;
       } catch (error: any) {
-        //console.error('Error en el proceso:', error);
-        setWalletError(error.message || 'Error al verificar la wallet');
+        console.error('Error en el proceso:', error);
+        setWalletError(error.message || 'An error ocurred while checking your wallet');
         setShowWalletModal(true);
         return false;
       }
     } catch (error) {
-      //console.log('Error en el proceso:', error);
-      setWalletError('Error al conectar con la wallet');
+      console.log('Error en el proceso:', error);
+      setWalletError('An error ocurred while checking your wallet');
       setShowWalletModal(true);
       return false;
     }
   };
 
   const handleSpin = async () => {
-    //console.log('Iniciando handleSpin');
+    console.log('Iniciando handleSpin');
     if (isSpinning || hasClaimed) {
-      //console.log('Ya está girando o ya giró');
+      console.log('Ya está girando o ya giró');
       return;
     }
     
+    setIsSpinning(true);
     const angle = await checkWallet();
-    //console.log('Ángulo recibido:', angle);
+    console.log('Ángulo recibido:', angle);
     if (angle === false) {
-      //console.log('No se pudo obtener el ángulo');
+      console.log('No se pudo obtener el ángulo');
+      setIsSpinning(false);
       return;
     }
 
-    //console.log('Iniciando giro con ángulo:', angle);
+    console.log('Iniciando giro con ángulo:', angle);
     setIsSpinning(true);
     setHasSpun(true);
 
+    // Solo agregamos las vueltas extras si es la primera vez que gira
+    const totalRotation = hasClaimed ? angle : (360 * 6) + angle;
+    setCurrentRotation(totalRotation);
+
     setTimeout(() => {
-      //console.log('Giro completado');
+      console.log('Giro completado');
       setIsSpinning(false);
       onSpinEnd?.();
     }, 5000);
@@ -262,21 +276,21 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
         aria-labelledby="wallet-dialog-title"
       >
         <DialogTitle id="wallet-dialog-title">
-          Conexión de Wallet Requerida
+          Wallet Connection Required
         </DialogTitle>
         <DialogContent>
           {walletError}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShowWalletModal(false)}>
-            Cerrar
+            Close
           </Button>
           {!(window as any).ethereum && (
             <Button
               onClick={() => window.open('https://metamask.io/download/', '_blank')}
               color="primary"
             >
-              Instalar MetaMask
+              Install MetaMask
             </Button>
           )}
         </DialogActions>

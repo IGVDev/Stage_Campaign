@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import Header from "../components/header";
 import RafflesComponent from "../components/raffles";
-// import SuperCampHome from "../components/super-camp-home";
 
 const Home: NextPage = () => {
   const [activeCompareButtons, setActiveCompareButtons] = useState<{ [key: string]: string | null }>({});
