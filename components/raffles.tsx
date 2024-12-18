@@ -148,8 +148,8 @@ const RafflesComponent: React.FC = () => {
   }, []);
 
   const handleSpinEnd = () => {
-    // Aquí puedes manejar lo que sucede cuando termina el giro
-    console.log("El giro ha terminado!");
+    // Maneja lo que ocurre cuando se completa la rotacion
+    console.log("Rotation finished!");
   };
 
   return (
