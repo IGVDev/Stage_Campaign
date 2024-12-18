@@ -118,7 +118,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
           console.log('Entering prize condition 7');
           // Premio USDT - ajustar este ángulo según la posición de la ruleta
           finalAngle = 45;
-          const message = 'Congrats you won 5 USDT!';
+          const message = 'Congrats you won $5 STAGE!';
           setPrizeMessage(message);
           localStorage.setItem('prizeMessage', message);
           setHasClaimed(true);
@@ -127,7 +127,7 @@ const SpinWheel: React.FC<SpinWheelProps> = ({
           console.log('Entering prize condition 8');
           // Premio STAGE - ajustar este ángulo según la posición de la ruleta
           finalAngle = 180;
-          const message = 'Congrats you won $5 STAGE!';
+          const message = 'Congrats you won 5 USDT!';
           setPrizeMessage(message);
           localStorage.setItem('prizeMessage', message);
           setHasClaimed(true);
